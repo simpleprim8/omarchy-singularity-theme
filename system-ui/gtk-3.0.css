@@ -1,0 +1,49 @@
+/* Singularity GTK3 companion: preserve widget geometry and semantic states. */
+@define-color theme_bg_color #08110f;
+@define-color theme_fg_color #d4dce7;
+@define-color theme_base_color #08110f;
+@define-color theme_text_color #d4dce7;
+@define-color theme_selected_bg_color #21313b;
+@define-color theme_selected_fg_color #dca276;
+@define-color insensitive_bg_color #09140f;
+@define-color insensitive_fg_color #819bb6;
+@define-color borders rgba(180,160,210,0.28);
+@define-color warning_color #dca276;
+@define-color error_color #ec8181;
+@define-color success_color #59d98b;
+@define-color accent_color #59d98b;
+@define-color accent_bg_color #59d98b;
+@define-color accent_fg_color #08110f;
+@define-color window_bg_color #08110f;
+@define-color window_fg_color #d4dce7;
+@define-color view_bg_color #08110f;
+@define-color view_fg_color #d4dce7;
+@define-color headerbar_bg_color #0b1714;
+@define-color headerbar_fg_color #b4a0d2;
+@define-color sidebar_bg_color #0b1813;
+@define-color sidebar_fg_color #86b3d1;
+window.background, dialog { background-color: #08110f; color: #d4dce7; }
+headerbar, .titlebar {
+  background-image: none;
+  background-color: #0b1714;
+  color: #b4a0d2;
+  border-color: rgba(180,160,210,0.28);
+}
+headerbar .title { font-family: "Rajdhani", sans-serif; font-weight: 500; }
+headerbar button image, .sidebar image { color: #59d98b; }
+.sidebar, .sidebar .view { background-color: #0b1813; color: #86b3d1; }
+.view, textview text, treeview, iconview { background-color: #08110f; color: #d4dce7; }
+.view:selected, treeview:selected, iconview:selected, row:selected {
+  background-color: #21313b; color: #dca276;
+}
+button { color: #b8c9d9; }
+button:hover { border-color: #86b3d1; }
+button:checked { color: #dca276; background-image: none; background-color: #21313b; }
+button.suggested-action { background-image: none; background-color: #59d98b; color: #08110f; }
+button.destructive-action { background-image: none; background-color: #b54e55; color: #fff5f5; }
+entry { background-color: #10201b; color: #d4dce7; border-color: rgba(134,179,209,0.45); }
+entry:focus { border-color: #b4a0d2; box-shadow: inset 0 0 0 1px #b4a0d2; }
+progressbar progress, scale highlight, switch:checked { background-color: #59d98b; }
+menu, popover, tooltip { background-color: #08110f; color: #d4dce7; border-color: #b4a0d2; }
+menuitem:hover { background-color: #21313b; color: #dca276; }
+.dim-label, .subtitle { color: #86b3d1; }

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "singularity.network",
+  "name": "Singularity Network",
+  "version": "2.0.0",
+  "author": "Omarchy contributors and simpleprim8",
+  "description": "Wi-Fi list and connection state",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "My Network",
+    "description": "Wi-Fi list and connection state",
+    "category": "Network",
+    "allowMultiple": false
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.network"
+  }
+}

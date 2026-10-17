@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "singularity.bluetooth",
+  "name": "Singularity Bluetooth",
+  "version": "2.0.0",
+  "author": "Omarchy contributors and simpleprim8",
+  "description": "Bluetooth device list with connect/disconnect",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "My Bluetooth",
+    "description": "Bluetooth device list with connect/disconnect",
+    "category": "Network",
+    "allowMultiple": false
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.bluetooth"
+  }
+}

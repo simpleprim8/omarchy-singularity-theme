@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+root=$(cd -- "$(dirname -- "$(readlink -f -- "$0")")" && pwd)
+case "${1:-status}" in
+  start|resume) omarchy-shell spacetime resume ;;
+  pause) omarchy-shell spacetime pause ;;
+  stop) omarchy-shell spacetime stop ;;
+  status) omarchy-shell spacetime status ;;
+  seek) omarchy-shell spacetime seek "${2:?Provide seconds, from 0 to 450}" ;;
+  speed) omarchy-shell spacetime speed "${2:?Provide a speed multiplier}" ;;
+  preview) exec quickshell -n -p "$root/preview.qml" ;;
+  restore) omarchy plugin enable omarchy.background ;;
+  enable) omarchy plugin enable singularity.background ;;
+  *) echo 'Usage: spacetime {start|pause|resume|stop|status|seek SECONDS|speed MULTIPLIER|preview|restore|enable}' >&2; exit 2 ;;
+esac

@@ -1,0 +1,140 @@
+# Singularity: receives a masked length from Plymouth, never password text.
+Window.SetBackgroundTopColor(0.008,0.027,0.016);
+Window.SetBackgroundBottomColor(0.008,0.027,0.016);
+global.sw = Window.GetWidth();
+global.sh = Window.GetHeight();
+global.scale = Math.Min(global.sw/1280,global.sh/720);
+global.ox = (global.sw-1280*global.scale)/2;
+global.oy = (global.sh-720*global.scale)/2;
+global.tick = 0;
+global.frame = 0;
+global.count = 0;
+global.travel = 0;
+global.entry_tick = 0;
+global.entry_drift = 0;
+global.root_ready = 0;
+global.submitted = 0;
+global.password_mode = 0;
+global.progress = 0;
+global.background = Sprite(Image("frame-0.png").Scale(1280*global.scale,720*global.scale));
+global.background.SetPosition(global.ox,global.oy,-100);
+global.dots = [];
+global.dot_images = [];
+for (i=0; i<16; i++) {
+    global.dot_images[i] = Image("dot.png").Scale(Math.Max(3,(13-i*0.55)*global.scale),Math.Max(3,(13-i*0.55)*global.scale));
+}
+# HUD assets are rendered from the same static QML panel as lock/login.
+global.hud_idle = Image("hud-idle.png").Scale(1280*global.scale,720*global.scale);
+global.hud_checking = Image("hud-checking.png").Scale(1280*global.scale,720*global.scale);
+global.hud_failed = Image("hud-failed.png").Scale(1280*global.scale,720*global.scale);
+global.hud_success = Image("hud-success.png").Scale(1280*global.scale,720*global.scale);
+global.hud = Sprite(global.hud_idle);
+global.hud.SetPosition(global.ox,global.oy,100);
+global.prompt = Sprite();
+global.message = Sprite();
+fun set_prompt(text) {
+    global.prompt.SetImage(Image.Text(text,0.79,0.87,0.81,1,"JetBrains Mono 10"));
+    global.prompt.SetPosition(global.ox+864*global.scale,global.oy+565*global.scale,110);
+}
+set_prompt("");
+
+fun draw_dot(index, step) {
+    if (step >= 32) { global.dots[index].SetOpacity(0); return; }
+    # Same meridian, exponential radius, deformation and camera as login.vert.
+    r = 48;
+    # Bound animation work regardless of native password length.
+    step = Math.Min(160, step);
+    whole = Math.Int(step);
+    for (j=0; j<whole; j++) r *= 0.860707976425;
+    r *= 1-(step-whole)*(1-0.860707976425);
+    spin = 2.4;
+    # exp(-r/22), using a short stable repeated-squaring approximation.
+    decay = 1/(1+r/(22*65536));
+    for (j=0; j<16; j++) decay *= decay;
+    angle = 1.57079632679+spin*decay;
+    tail = 8/118;
+    depression = (8/(r+8)-tail)/(1-tail);
+    x = Math.Cos(angle)*r;
+    y = -34*depression-62;
+    z = Math.Sin(angle)*r-72;
+    length = Math.Sqrt(82*82+72*72);
+    fy = -82/length;
+    fz = -72/length;
+    depth = y*fy+z*fz;
+    vertical = y*(-fz)+z*fy;
+    px = 640+x*2.35/depth*360;
+    py = 720*(0.5-vertical*2.35/depth*0.5);
+    size_index = Math.Min(15,Math.Int(step*0.5));
+    image = global.dot_images[size_index];
+    global.dots[index].SetImage(image);
+    global.dots[index].SetPosition(global.ox+px*global.scale-image.GetWidth()/2,global.oy+py*global.scale-image.GetHeight()/2,20);
+    global.dots[index].SetOpacity(Math.Min(1,r/0.8)*Math.Max(0,Math.Min(1,(32-step)/5)));
+}
+
+fun refresh() {
+    global.tick++;
+    global.travel += (global.count-global.travel)*0.22;
+    if (global.password_mode && global.count && global.entry_drift < 32) {
+        global.entry_drift = Math.Min(32,(global.tick-global.entry_tick)*32/360);
+        for (i=0; i<global.count; i++) draw_dot(i,Math.Max(0,global.travel-1-i+global.entry_drift));
+    }
+}
+Plymouth.SetRefreshRate(30);
+Plymouth.SetRefreshFunction(refresh);
+
+fun password(prompt, bullets) {
+    # Drawing is bounded; the real password remains untouched in Plymouth.
+    bullets = Math.Max(0, Math.Min(128, bullets));
+    global.password_mode = 1;
+    if (!global.count || !bullets || (bullets != global.count && global.entry_drift >= 32)) {
+        global.entry_tick = global.tick;
+        global.entry_drift = 0;
+        global.travel = 0;
+    }
+    global.count = bullets;
+    # Hide deleted dots immediately. Only visual positions are eased.
+    for (i=0; global.dots[i]; i++) global.dots[i].SetOpacity(0);
+    for (i=0; i<bullets; i++) {
+        if (!global.dots[i]) global.dots[i] = Sprite();
+        draw_dot(i,Math.Max(0,global.travel-1-i+global.entry_drift));
+    }
+    if (global.submitted && !bullets) global.hud.SetImage(global.hud_failed);
+    else if (bullets) { global.submitted = 0; global.hud.SetImage(global.hud_idle); }
+    # Preserve device identification and recovery context supplied by Plymouth.
+    set_prompt(prompt);
+}
+Plymouth.SetDisplayPasswordFunction(password);
+
+fun root_mounted() {
+    global.root_ready = 1;
+    global.hud.SetImage(global.hud_success);
+    set_prompt("");
+}
+Plymouth.SetRootMountedFunction(root_mounted);
+
+fun normal() {
+    if (global.password_mode && global.count) global.submitted = 1;
+    global.password_mode = 0;
+    global.count = 0;
+    for (i=0; global.dots[i]; i++) global.dots[i].SetOpacity(0);
+    if (global.root_ready) global.hud.SetImage(global.hud_success);
+    else global.hud.SetImage(global.hud_checking);
+    set_prompt("");
+}
+Plymouth.SetDisplayNormalFunction(normal);
+
+fun question(prompt, entry) {
+    global.password_mode = 0;
+    for (i=0; global.dots[i]; i++) global.dots[i].SetOpacity(0);
+    set_prompt(prompt+" "+entry);
+}
+Plymouth.SetDisplayQuestionFunction(question);
+
+fun message(text) {
+    global.message.SetImage(Image.Text(text,0.79,0.87,0.81,1,"JetBrains Mono 9"));
+    global.message.SetPosition(global.ox+864*global.scale,global.oy+590*global.scale,100);
+    global.message.SetOpacity(1);
+}
+fun hide_message(text) { global.message.SetOpacity(0); }
+Plymouth.SetMessageFunction(message);
+Plymouth.SetHideMessageFunction(hide_message);

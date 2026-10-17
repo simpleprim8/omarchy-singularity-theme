@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Theme changes can replace the underlying static image. Keep the native
+# animation running when its matching theme is selected.
+set -euo pipefail
+if [[ ${1:-} == singularity ]]; then
+  omarchy-shell spacetime resume
+fi

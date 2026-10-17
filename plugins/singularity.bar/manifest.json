@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "singularity.bar",
+  "name": "Singularity Bar",
+  "version": "2.0.0",
+  "author": "Omarchy contributors and simpleprim8",
+  "description": "Status bar with widgets",
+  "kinds": [
+    "bar"
+  ],
+  "entryPoints": {
+    "bar": "Bar.qml"
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.bar"
+  }
+}

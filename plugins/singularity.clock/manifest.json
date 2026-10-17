@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "singularity.clock",
+  "name": "Singularity Clock",
+  "version": "2.0.0",
+  "author": "Omarchy contributors and simpleprim8",
+  "description": "Date/time label with a calendar popup",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "My Clock",
+    "description": "Date/time label with a calendar popup",
+    "category": "Time",
+    "allowMultiple": false
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.clock"
+  }
+}

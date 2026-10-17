@@ -1,0 +1,74 @@
+/* Singularity: the shell palette expressed through native GTK/libadwaita roles. */
+:root {
+  --accent-bg-color: #59d98b;
+  --accent-fg-color: #08110f;
+  --accent-color: #59d98b;
+  --window-bg-color: #08110f;
+  --window-fg-color: #d4dce7;
+  --view-bg-color: #08110f;
+  --view-fg-color: #d4dce7;
+  --headerbar-bg-color: #0b1714;
+  --headerbar-fg-color: #b4a0d2;
+  --headerbar-backdrop-color: #09130f;
+  --headerbar-border-color: rgba(180,160,210,0.35);
+  --headerbar-shade-color: rgba(0,0,0,0.18);
+  --headerbar-darker-shade-color: rgba(0,0,0,0.35);
+  --sidebar-bg-color: #0b1813;
+  --sidebar-fg-color: #86b3d1;
+  --sidebar-backdrop-color: #09140f;
+  --sidebar-border-color: rgba(180,160,210,0.24);
+  --sidebar-shade-color: rgba(0,0,0,0.14);
+  --secondary-sidebar-bg-color: #0a1511;
+  --secondary-sidebar-fg-color: #b8c9d9;
+  --secondary-sidebar-backdrop-color: #08110f;
+  --card-bg-color: #10201b;
+  --card-fg-color: #d4dce7;
+  --card-shade-color: rgba(0,0,0,0.2);
+  --popover-bg-color: #08110f;
+  --popover-fg-color: #d4dce7;
+  --popover-shade-color: rgba(0,0,0,0.35);
+  --dialog-bg-color: #0b1714;
+  --dialog-fg-color: #d4dce7;
+  --thumbnail-bg-color: #10201b;
+  --thumbnail-fg-color: #86b3d1;
+  --shade-color: rgba(0,0,0,0.28);
+  --borders: rgba(180,160,210,0.28);
+  --error-color: #ec8181;
+  --error-bg-color: #b54e55;
+  --error-fg-color: #fff5f5;
+  --warning-color: #dca276;
+  --warning-bg-color: #a7703e;
+  --warning-fg-color: #08110f;
+  --success-color: #59d98b;
+  --success-bg-color: #28764d;
+  --success-fg-color: #e3f3e8;
+  --link-color: #86b3d1;
+  --link-visited-color: #b4a0d2;
+}
+headerbar .title, headerbar .heading, .navigation-sidebar .heading {
+  color: #b4a0d2;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 500;
+}
+headerbar button image, .navigation-sidebar image, placesview image { color: #59d98b; }
+headerbar .subtitle, .dim-label, .subtitle { color: #86b3d1; }
+.navigation-sidebar row:selected, placessidebar row:selected,
+gridview > child:selected, columnview row:selected, listview > row:selected {
+  background-color: rgba(134,179,209,0.14);
+  color: #dca276;
+}
+.navigation-sidebar row:selected image, placessidebar row:selected image { color: #dca276; }
+selection { background-color: rgba(134,179,209,0.30); color: #e3f3e8; }
+entry:focus-within, text:focus-within { outline-color: #b4a0d2; }
+button:checked:not(.destructive-action):not(.suggested-action) {
+  background-color: rgba(134,179,209,0.14);
+  color: #dca276;
+}
+progressbar progress, scale highlight, switch:checked { background-color: #59d98b; }
+popover > contents { border: 1px solid rgba(180,160,210,0.65); }
+tooltip { background-color: #08110f; color: #b8c9d9; }
+/* Main windows receive 0.90/0.88 compositing; do not multiply CSS alpha layers. */
+headerbar .path-bar, headerbar .path-bar button, headerbar .path-bar label,
+headerbar .pathbar, headerbar .pathbar button, headerbar .pathbar label {
+  color: #b4a0d2;
+}
