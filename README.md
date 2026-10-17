@@ -10,6 +10,8 @@ distinct semantic colors keep applications readable around the motion.
 **[Watch a complete 90-second camera pass](https://github.com/simpleprim8/spacetime-desktop/blob/main/media/journey.mp4)**
 — the animation is the centerpiece; the theme frames it.
 
+https://github.com/user-attachments/assets/0d1c4737-e772-4f24-a5eb-69d7c7baae53
+
 ## Install
 
 ```bash
