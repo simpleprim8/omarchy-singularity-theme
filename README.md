@@ -1,10 +1,14 @@
 # Singularity
 
-A quiet emerald-and-black theme for Omarchy, paired with an optional native
-animated spacetime desktop. Pale green text, subtle forest surfaces, and
-distinct semantic colors keep everyday applications readable around the mesh.
+An emerald-and-black Omarchy theme built around a native animated spacetime
+desktop. A transparent wire mesh bends into a singular point as the camera
+explores above and below the field. Pale green text, quiet surfaces, and
+distinct semantic colors keep applications readable around the motion.
 
 ![Singularity on a real Omarchy desktop](preview.png)
+
+**[Watch a complete 90-second camera pass](https://github.com/simpleprim8/spacetime-desktop/blob/main/media/journey.mp4)**
+— the animation is the centerpiece; the theme frames it.
 
 ## Install
 
