@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "singularity.monitor",
+  "name": "Singularity Monitor",
+  "version": "2.0.0",
+  "author": "Omarchy contributors and simpleprim8",
+  "description": "Brightness slider and laptop display controls",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "My Display",
+    "description": "Brightness slider and laptop display controls",
+    "category": "System",
+    "allowMultiple": false
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.monitor"
+  }
+}

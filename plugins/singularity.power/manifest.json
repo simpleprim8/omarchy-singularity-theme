@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "singularity.power",
+  "name": "Singularity Power",
+  "version": "2.0.0",
+  "author": "Omarchy contributors and simpleprim8",
+  "description": "Battery, power profile, and system stats",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "My Power",
+    "description": "Battery, power profile, and system stats",
+    "category": "System",
+    "allowMultiple": false
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.power"
+  }
+}

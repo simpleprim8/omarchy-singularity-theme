@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "singularity.speedtest",
+  "name": "Singularity Speedtest",
+  "version": "2.0.0",
+  "author": "Omarchy contributors and simpleprim8",
+  "description": "Internet speed test with download and upload dials",
+  "kinds": [
+    "panel"
+  ],
+  "entryPoints": {
+    "panel": "Panel.qml"
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.speedtest"
+  }
+}

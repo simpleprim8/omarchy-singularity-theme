@@ -1,0 +1,11 @@
+[Plymouth Theme]
+Name=Singularity
+Description=Static spacetime mesh, causal navigation HUD and falling password dots
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/singularity
+ScriptFile=/usr/share/plymouth/themes/singularity/singularity.script
+ConsoleLogBackgroundColor=0x020704
+Font=JetBrains Mono 12
+MonospaceFont=JetBrains Mono 12

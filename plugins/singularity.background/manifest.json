@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "singularity.background",
+  "name": "Singularity Background",
+  "version": "2.0.0",
+  "author": "Omarchy contributors and simpleprim8",
+  "description": "Single transparent point vortex with five cinematic camera routes.",
+  "kinds": [
+    "service"
+  ],
+  "entryPoints": {
+    "service": "Background.qml"
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.background"
+  }
+}
